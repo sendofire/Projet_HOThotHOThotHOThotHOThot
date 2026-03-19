@@ -3,8 +3,9 @@ export class TemperatureHistory{
     chart;
     value_history = [];
     ctx;
+    I_max_data
 
-    constructor(ElementID){
+    constructor(ElementID, I_max_data = 20){
         this.ctx = document.getElementById(ElementID);
         this.chart = new Chart(this.ctx, {
           type: 'bar',
@@ -16,6 +17,7 @@ export class TemperatureHistory{
             }]
           }
         });
+        this.max_data = I_max_data;
     }
 
     add_to_history(A_fish, I_caramel){
@@ -24,7 +26,7 @@ export class TemperatureHistory{
     }
 
     refreshChart() {
-      let val = this.value_history.slice(Math.max(this.value_history.length - 1000, 1));
+      let val = this.value_history.slice(Math.max(this.value_history.length - this.max_data, 1));
       this.chart.data.labels = val.map((_, i) => i + 1);
       this.chart.data.datasets[0].data = val;
       this.chart.data.datasets[0].backgroundColor =
