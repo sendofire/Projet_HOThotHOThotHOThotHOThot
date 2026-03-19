@@ -66,9 +66,19 @@
                 <h2>
                     Temperature:
                 </h2>
+                <h3>
+                    extérieur
+                </h3>
                 <p id="case" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
                 <div id="avertTemp" role="alert">
                     <p id="funny_sentence" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
+                </div>
+                <h3>
+                    intérieur
+                </h3>
+                <p id="case_int" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
+                <div id="avertTemp" role="alert">
+                    <p id="funny_sentence_int" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
                 </div>
 
             </div>
@@ -82,12 +92,24 @@
                 <h2>
                     Historique des temperatures:
                 </h2>
+                <h3>
+                    extérieur
+                </h3>
                 <div class="chart-container">
-                    <canvas id="myChart" aria-label="Histogramme des températures" role="img"></canvas>
+                    <canvas id="myChart" aria-label="Histogramme des températures extérieures" role="img"></canvas>
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 </div>
                 <p id="listeHistorique" aria-live="polite" aria-atomic="true" aria-relevant="all">
 
+                </p>
+                <h3>
+                    intérieur
+                </h3>
+                <div class="chart-container">
+                    <canvas id="myChart__int" aria-label="Histogramme des températures intérieures" role="img"></canvas>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                </div>
+                <p id="listeHistorique" aria-live="polite" aria-atomic="true" aria-relevant="all">
                 </p>
             </div>
         </main>
