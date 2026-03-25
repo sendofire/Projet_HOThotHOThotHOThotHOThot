@@ -20,8 +20,8 @@ export class TemperatureHistory{
         this.max_data = I_max_data;
     }
 
-    add_to_history(A_fish, I_caramel){
-        let I_value = A_fish[(I_caramel - 1 + 20) % 20];
+    add_to_history(A_dummy_data, I_temp){
+        let I_value = A_dummy_data[(I_temp - 1 + 20) % 20];
         this.value_history.push(I_value);
     }
 

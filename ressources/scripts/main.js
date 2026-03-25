@@ -19,5 +19,5 @@ var temp_int = new Temperature(-10, 40, "case_int", "funny_sentence_int", temp_h
 temp_int.newRandomArray();
 
 //setInterval(temp.change_value, 200);
-setInterval(() => temp_ext.change_value(), 2000);
-setInterval(() => temp_int.change_value(), 2000);
+setInterval(() => temp_ext.change_value(), 200);
+setInterval(() => temp_int.change_value(), 200);
