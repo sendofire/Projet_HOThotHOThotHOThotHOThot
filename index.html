@@ -59,14 +59,14 @@
                     extérieur
                 </h3>
                 <p id="case" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
-                <div id="avertTemp" role="alert">
+                <div id="avertTempExt" role="alert">
                     <p id="funny_sentence" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
                 </div>
                 <h3>
                     intérieur
                 </h3>
                 <p id="case_int" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
-                <div id="avertTemp" role="alert">
+                <div id="avertTempInt" role="alert">
                     <p id="funny_sentence_int" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
                 </div>
 
@@ -88,7 +88,7 @@
                     <canvas id="myChart" aria-label="Histogramme des températures extérieures" role="img"></canvas>
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 </div>
-                <p id="listeHistorique" aria-live="polite" aria-atomic="true" aria-relevant="all">
+                <p id="listeHistoriqueExt" aria-live="polite" aria-atomic="true" aria-relevant="all">
 
                 </p>
                 <h3>
@@ -98,9 +98,38 @@
                     <canvas id="myChart__int" aria-label="Histogramme des températures intérieures" role="img"></canvas>
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 </div>
-                <p id="listeHistorique" aria-live="polite" aria-atomic="true" aria-relevant="all">
+                <p id="listeHistoriqueInt" aria-live="polite" aria-atomic="true" aria-relevant="all">
                 </p>
             </div>
+
+            <!-- Panneau 3: Documentation -->
+            <div id="documentation"
+                 role="tabpanel"
+                 aria-labelledby="btnDocumentation"
+                 tabindex="0"
+                 class="is-hidden">
+                <h2>
+                    Documentation:
+                </h2>
+                <p>
+                    Ce projet a été réalisé dans le cadre du cours de développement web à l'Université de Montréal. Il vise à créer une interface utilisateur pour un système de surveillance de la température, avec des fonctionnalités d'accessibilité et de visualisation des données.
+                </p>
+            </div>
+            
+            <!-- Panneau 4: Compte -->
+            <div id="compte"
+                 role="tabpanel"
+                 aria-labelledby="btnProfil"
+                 tabindex="0"
+                 class="is-hidden">
+                <h2>
+                    Compte utilisateur:
+                </h2>
+                <p>
+                    Cette section est dédiée à la gestion du compte utilisateur. Vous pouvez y mettre à jour vos informations personnelles, changer votre mot de passe et gérer vos préférences de notification.
+                </p>
+            </div>
+
         </main>
         <script src="https://cdn.jsdelivr.net/npm/chart.js" integrity="sha384-1oM1DKD8kSRaYlZ0W/77KS5wP0kjvz4alkM5lAgnXtt0MZf0YrwkB5U+Q0t+zQ0R" crossorigin="anonymous"></script>
         <script type="module" src="ressources/scripts/main.js"></script>

@@ -41,11 +41,12 @@ export class Temperature{
     newRandomArray(){
         this.A_dummy_data = Array.from({length: 20}, () => this.getRandomInt(this.I_val_min, this.I_val_max));
         this.A_dummy_data_int = Array.from({length: 20}, () => this.getRandomInt(this.I_val_min, this.I_val_max));
-
     }
 
     check_color(){
         let I_value = this.A_dummy_data[this.I_temp];
+        let I_value_int = this.A_dummy_data_int[this.I_temp_int];
+
         if (I_value < 0){
             this.O_temp.setAttribute("class", "un");
             this.O_sentence.textContent = "banquise en vue !";
@@ -53,10 +54,13 @@ export class Temperature{
         else if (I_value > 35){
             this.O_temp.setAttribute("class", "four");
             this.O_sentence.textContent = "Hot Hot Hot!";
+        } else {
+            this.O_temp.removeAttribute("class");
+            this.O_sentence.textContent = "";
         }
 
 
-        let I_value_int = this.A_dummy_data_int[this.I_temp_int];
+        
         if (I_value_int < 0){
             this.O_temp_int.setAttribute("class", "un");
             this.O_sentence_int.textContent = "canalisations gelées, appelez SOS plombier et mettez un bonnet !";
@@ -72,28 +76,31 @@ export class Temperature{
         else if (I_value_int > 50){
             this.O_temp_int.setAttribute("class", "four");
             this.O_sentence_int.textContent = "Appelez les pompiers ou arrêtez votre barbecue !";
+        } else {
+            this.O_temp_int.removeAttribute("class");
+            this.O_sentence_int.textContent = "";
         }
     }
 
     change_value(){
-        if (this.hist_temp && this.hist_temp_int != null){
+        if (this.hist_temp && this.hist_temp_int){
             this.hist_temp.add_to_history(this.A_dummy_data, this.I_temp);
             this.hist_temp.refreshChart();
             this.hist_temp_int.add_to_history(this.A_dummy_data_int, this.I_temp_int);
             this.hist_temp_int.refreshChart();
         }
-        this.O_temp.textContent = this.A_dummy_data[this.I_temp];
-        this.check_color();
-        if (this.I_temp >= 19){
-            this.newRandomArray();
-        }
-        this.I_temp = (this.I_temp + 1) % 20;
 
+        this.O_temp.textContent = this.A_dummy_data[this.I_temp];
         this.O_temp_int.textContent = this.A_dummy_data_int[this.I_temp_int];
         this.check_color();
-        if (this.I_temp_int >= 19){
+
+        const endReached = this.I_temp >= 19 || this.I_temp_int >= 19;
+
+        this.I_temp = (this.I_temp + 1) % 20;
+        this.I_temp_int = (this.I_temp_int + 1) % 20;
+
+        if (endReached) {
             this.newRandomArray();
         }
-        this.I_temp_int = (this.I_temp_int + 1) % 20;
     }
 }
