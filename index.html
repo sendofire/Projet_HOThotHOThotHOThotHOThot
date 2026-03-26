@@ -12,8 +12,9 @@
                 Systeme de temperature
             </h1>
 
-            <!-- Système d'onglets accessible avec ARIA -->
-            <div role="tablist" class="manual" aria-label="Panneaux de température">
+            <div>
+                <!-- Système d'onglets accessible avec ARIA -->
+                <div role="tablist" class="manual" aria-label="Panneaux de température">
                 <button role="tab"
                         id="btnTempsReel"
                         class="active"
@@ -27,7 +28,7 @@
                         id="btnHistorique"
                         aria-selected="false"
                         aria-controls="historique"
-                        tabindex="-1">
+                        tabindex="1">
                     Historique
                 </button>
 
@@ -35,25 +36,13 @@
                         id="btnDocumentation"
                         aria-selected="false"
                         aria-controls="documentation"
-                        tabindex="-1">
+                        tabindex="2">
                     Documentation
                 </button>
-
-                <button role="tab"
-                        id="btnProfil"
-                        aria-selected="false"
-                        aria-controls="profil"
-                        tabindex="-1">
-                    Profil
-                </button>
-
-                <button role="tab"
-                        id="btnConnexion"
-                        aria-selected="false"
-                        aria-controls="connexion"
-                        tabindex="-1">
-                    Connexion
-                </button>
+                </div>
+                <div>
+                    <button type="button"><a href="ressources/pages/account.html">Account</a></button>
+                </div>
             </div>
             <hr>
         </header>
