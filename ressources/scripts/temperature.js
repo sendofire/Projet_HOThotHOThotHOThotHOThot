@@ -69,11 +69,11 @@ export class Temperature{
             this.O_temp_int.setAttribute("class", "deux");
             this.O_sentence_int.textContent = "montez le chauffage ou mettez un gros pull !";
         }
-        else if (I_value_int > 22 && I_value_int <= 55){
+        else if (I_value_int > 22 && I_value_int <= 50){
             this.O_temp_int.setAttribute("class", "tres");
             this.O_sentence_int.textContent = "Baissez le chauffage !";
         }
-        else if (I_value_int > 55){
+        else if (I_value_int > 50){
             this.O_temp_int.setAttribute("class", "four");
             this.O_sentence_int.textContent = "Appelez les pompiers ou arrêtez votre barbecue !";
         } else {
