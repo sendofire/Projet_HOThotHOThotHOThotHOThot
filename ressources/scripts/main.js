@@ -169,5 +169,3 @@ tabs.forEach(tab => {
         }
     });
 });
-
-
