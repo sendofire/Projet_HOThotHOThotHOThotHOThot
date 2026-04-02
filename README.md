@@ -9,7 +9,8 @@ This is for the moment only for linux system, you can create the certificate in 
  ```bash
  brew install mkcert        # macOS
  choco install mkcert       # Windows
- sudo apt install mkcert    # Linux
+ sudo apt install mkcert    # Ubuntu
+ sudo pacman -S mkcert      # ArchLinux
  ```
  
 Then do the command :
@@ -95,8 +96,11 @@ sudo systemctl enable --now httpd
 sudo systemctl restart httpd
 ```
 
-### On Ubuntu
-Install `apache`.<br>
+### On Ubuntu (WIP)
+Install `apache`:
+```bash
+sudo apt-get install apache
+```
 Activate the service `httpd`:
 ```bash
 # Check httpd status
