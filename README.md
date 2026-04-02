@@ -85,6 +85,8 @@ In the file `/etc/httpd/conf/extra/httpd-vhosts.conf`, add at the end this :
     CustomLog /var/log/httpd/myapp-ssl-access.log combined
 </VirtualHost>
 ```
+> NOTE :
+> I recommend to set the path of the project in `/srv/http/` because apache may not have the autorisation to read the file in your user directory. 
 
 ```bash
 sudo apachectl configtest    # Should say: Syntax OK
