@@ -24,6 +24,23 @@ This is the command to create a certificate with `openssl` :
  ```
 
 ## Configuration of the server (Apache)
+
+### On Windows (WIP)
+
+>WIP : There is no step for the use of `XAMPP`.
+
+First, install `XAMPP`, here the [sourceForge link for XAMPP](https://sourceforge.net/projects/xampp/).
+
+Second, move the certificate in a directory, for exemple : `C:\xampp\apache\conf\ssl\`.\
+Then open the file `C\xampp\apache\conf\extra\httpd-ssl.conf` and change the following lines :
+```apacheconf
+SSLCertificateFile "C:/xampp/apache/conf/ssl/localhost.pem"
+SSLCertificateKeyFile "C:/xampp/apache/conf/ssl/localhost-key.pem"
+```
+Third, if the line `Include conf/extra/httpd-ssl.conf` is uncommented in the file `C:\xampp\apache\conf\httpd.conf`.
+
+Now you only need to restart apache. Go to `https://localhost/`.
+
 ### On Archlinux
 
 Move the certificate made by `mkcert` in a directory,
@@ -33,7 +50,7 @@ for exemple the folder `/etc/httpd/ssl/mkcert/`.
 # You need to create the directory.
 sudo mv localhost* /etc/httpd/ssl/mkcert/
 ```
->NOTE : This may not be needed
+>NOTE : I recommend to put the certificate in `/etc/httpd/` because apache may not have the right to read the user directory.
 
 Go to the directory where the certificate is and do this :
 ```bash
@@ -96,15 +113,6 @@ sudo systemctl restart httpd
 ```
 
 ### On Ubuntu
-Install `apache`.<br>
-Activate the service `httpd`:
-```bash
-# Check httpd status
-systemctl status httpd
-# Start the service if necessary
-systemctl start httpd
-```
-
 Move the certificate made by `mkcert` in a directory,
 for exemple the folder `/etc/ssl/mkcert/`.
 ```bash
@@ -112,12 +120,14 @@ for exemple the folder `/etc/ssl/mkcert/`.
 # You need to create the directory.
 sudo mv localhost* /etc/ssl/mkcert/
 ```
-Create a config file :
+Enable required Apache modules
 ```bash
-# If the directory are not present make them with "sudo mkdir [dir_name]"
-sudo nano /etc/apache2/sites-available/project_hotHot.conf
+sudo a2enmod ssl
+sudo a2enmod rewrite
+sudo systemctl restart apache2
 ```
-Paste this config parameter :
+
+Create a configuration file for your site in `/etc/apache2/sites-available/myapp-ssl.conf` with the following content :
 ```apacheconf
 <VirtualHost *:443>
     ServerName localhost
@@ -146,3 +156,23 @@ Paste this config parameter :
     Redirect permanent / https://localhost/
 </VirtualHost>
 ```
+> NOTE : Change /var/www/myapp to the actual path of your PHP project.
+> NOTE : I recommend to set the path of the project in `/var/www/` because apache may not have the autorisation to read the file in your user directory.
+
+Enable the site & restart Apache.
+```bash
+sudo a2ensite myapp-ssl.conf
+sudo apache2ctl configtest    # Should say: Syntax OK
+sudo systemctl reload apache2
+```
+
+Fix certificate permissions (if needed), Apache needs read access to the certificate files:
+```bash
+sudo chmod 640 /etc/ssl/mkcert/localhost-key.pem
+sudo chown root:ssl-cert /etc/ssl/mkcert/localhost-key.pem
+# Add Apache's user to the ssl-cert group if not already:
+sudo usermod -aG ssl-cert www-data
+sudo systemctl restart apache2
+```
+
+The configuration should work now, go to `https://localhost/`.
