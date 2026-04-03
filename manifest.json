@@ -1,0 +1,21 @@
+{
+  "name": "Système de Température",
+  "short_name": "TempSys",
+  "description": "Surveillance de température intérieure et extérieure",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#f5f7fa",
+  "theme_color": "#2474d6",
+  "icons": [
+    {
+      "src": "ressources/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "ressources/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

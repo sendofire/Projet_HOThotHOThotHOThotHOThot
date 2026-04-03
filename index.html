@@ -5,6 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>TP2</title>
         <link rel="stylesheet" href="ressources/styles/style.css">
+        <!-- PWA Manifest -->
+        <link rel="manifest" href="/manifest.json">
+        <meta name="theme-color" content="#2474d6">
+        <!-- iOS PWA support -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="apple-mobile-web-app-title" content="TempSys">
     </head>
     <body>
         <header>
@@ -15,6 +22,7 @@
             <div>
                 <div>
                     <button class="button"><a href="ressources/pages/account.html">Account</a></button>
+                    <!-- Le bouton d'installation PWA est injecté ici par main.js -->
                 </div>
                 <!-- Système d'onglets accessible avec ARIA -->
                 <div role="tablist" class="manual" aria-label="Panneaux de température">
@@ -86,20 +94,15 @@
                 </h3>
                 <div class="chart-container">
                     <canvas id="myChart" aria-label="Histogramme des températures extérieures" role="img"></canvas>
-                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 </div>
-                <p id="listeHistoriqueExt" aria-live="polite" aria-atomic="true" aria-relevant="all">
-
-                </p>
+                <p id="listeHistoriqueExt" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
                 <h3>
                     intérieur
                 </h3>
                 <div class="chart-container">
                     <canvas id="myChart__int" aria-label="Histogramme des températures intérieures" role="img"></canvas>
-                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 </div>
-                <p id="listeHistoriqueInt" aria-live="polite" aria-atomic="true" aria-relevant="all">
-                </p>
+                <p id="listeHistoriqueInt" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
             </div>
 
             <!-- Panneau 3: Documentation -->
@@ -131,7 +134,7 @@
             </div>
 
         </main>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js" integrity="sha384-1oM1DKD8kSRaYlZ0W/77KS5wP0kjvz4alkM5lAgnXtt0MZf0YrwkB5U+Q0t+zQ0R" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script type="module" src="ressources/scripts/main.js"></script>
     </body>
 </html>

@@ -34,6 +34,74 @@
   text-decoration: none;
 }
 
+.btn-install {
+  background-color: #a3b0c0;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-install:hover,
+.btn-install:focus {
+  background-color: #1a5bb0;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+#update-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background-color: #fff8e1;
+  border-bottom: 2px solid #ffc107;
+  font-size: 0.95rem;
+}
+
+#update-banner span {
+  flex: 1;
+}
+
+#install-tip {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+#install-tip-box {
+  background: #fff;
+  border-radius: 10px;
+  padding: 24px 28px;
+  max-width: 380px;
+  width: 90%;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+
+#install-tip-box strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+#install-tip-box ul {
+  padding-left: 18px;
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+#install-tip-close {
+  display: block;
+  margin-left: auto;
+}
+
 [role="tablist"] {
   min-width: 100%;
 }
