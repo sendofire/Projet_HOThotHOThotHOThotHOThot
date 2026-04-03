@@ -1,0 +1,29 @@
+https://doc.ubuntu-fr.org/apache2
+https://lehollandaisvolant.net/?d=2019/01/07/22/57/47-localhost-et-https
+https://httpd.apache.org/docs/2.4/vhosts/
+https://community.letsencrypt.org/t/sslcertificatefile-file-private-etc-apache2-server-crt-does-not-exist-or-is-empty/89175/17
+
+<VirtualHost *:443>
+    ServerName localhost
+        # replace it with the path of the project root
+    DocumentRoot "/home/alex/Documents/BUT2_info_2025-2026/R4.A10_Complement_web/Projet_HOThotHOThotHOThotHOThot/"
+
+
+    SSLEngine on
+    SSLCertificateFile    /etc/httpd/ssl/mkcert/localhost.pem
+    SSLCertificateKeyFile /etc/httpd/ssl/mkcert/localhost-key.pem
+
+    <Directory "/home/alex/Documents/BUT2_info_2025-2026/R4.A10_Complement_web/Projet_HOThotHOThotHOThotHOThot/">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog  /var/log/httpd/project_hotHot-ssl-error.log
+    CustomLog /var/log/httpd/project_hotHot-ssl-access.log combined
+</VirtualHost>
+
+
+>NOTE : use the command `sudo usermod -a -G http [username]` to add the user to the group http, this should allow apache to access the data in the user directory. 
+
+> NOTE : the problem seem that apache can't read the project, because it can't read the /home/alex/ folder

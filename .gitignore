@@ -1,0 +1,2 @@
+# Should ignore the file used to certificate the https connexion
+*pem
