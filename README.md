@@ -114,6 +114,11 @@ sudo systemctl restart httpd
 ```
 
 ### On Ubuntu
+Install Apache if you don't have it already :
+```bash
+sudo apt-get install apache2
+```
+
 Move the certificate made by `mkcert` in a directory,
 for exemple the folder `/etc/ssl/mkcert/`.
 ```bash
