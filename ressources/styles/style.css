@@ -1,20 +1,20 @@
 .un {
-    border: 2px, solid blue;
+  border: 2px solid blue;
     color: blue;
 }
 
 .deux {
-    border: 2px, solid green;
+  border: 2px solid green;
     color: green;
 }
 
 .tres {
-    border: 2px, solid tan;
+  border: 2px solid tan;
     color: tan;
 }
 
 .four {
-    border: 2px, solid crimson;
+  border: 2px solid crimson;
     color: crimson;
 }
 
@@ -104,4 +104,84 @@
 
 [role="tabpanel"] p {
   margin: 0;
+}
+
+#minJourExt,
+#maxJourExt,
+#minJourInt,
+#maxJourInt {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+dialog {
+  border: 2px solid hsl(219deg 1% 72%);
+  border-radius: 12px;
+  padding: 1rem;
+  max-width: 36rem;
+  width: min(90vw, 36rem);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.0);
+}
+
+#alertList {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.alert-item {
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #f7f7f7;
+}
+
+.alert-cold {
+  border-left: 4px solid #4fc3f7;
+}
+
+.alert-hot {
+  border-left: 4px solid #e57373;
+}
+
+#toastContainer {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 1200;
+  pointer-events: none;
+}
+
+.toast {
+  min-width: 16rem;
+  max-width: 28rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  background: #222;
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+  opacity: 0.95;
+  transform: translateY(0);
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+
+.toast.alert-cold {
+  border-left: 4px solid #4fc3f7;
+}
+
+.toast.alert-hot {
+  border-left: 4px solid #e57373;
+}
+
+.toast-exit {
+  opacity: 0;
+  transform: translateY(6px);
 }
