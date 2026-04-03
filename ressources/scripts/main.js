@@ -1,4 +1,6 @@
-// exo 1
+import { Temperature } from './temperature.js';
+import { TemperatureHistory } from './history.js';
+import { TabsManual } from './tabs_manual.js';
 
 class RapportMeteoObservable {
     constructor() {

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TP2</title>
+        <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+        <header>
+            <h1>
+                Systeme de temperature
+            </h1>
+
+            <div>
+                <div>
+                    <button class="button"><a href="../../index.html">Home</a></button>
+                </div>
+                <!-- Système d'onglets accessible avec ARIA -->
+                <div role="tablist" class="manual" aria-label="Panneaux de température">
+                <button role="tab"
+                        id="btnConnexion"
+                        class="active"
+                        aria-selected="true"
+                        aria-controls="connexion"
+                        tabindex="0">
+                    Connexion
+                </button>
+
+                <button role="tab"
+                        id="btnAccountInfo"
+                        aria-selected="false"
+                        aria-controls="account-info"
+                        tabindex="-1">
+                    Information de compte
+                </button>
+                </div>
+            </div>
+            <hr>
+        </header>
+        <main>
+            <!-- Panneau 1: Connexion -->
+            <div id="connexion"
+                 role="tabpanel"
+                 aria-labelledby="btnConnexion"
+                 tabindex="0">
+                <button class="button">CONNEXION</button>
+
+            </div>
+
+            <!-- Panneau 2: Historique -->
+            <div id="account-info"
+                 role="tabpanel"
+                 aria-labelledby="btnAccountInfo"
+                 tabindex="0"
+                 class="is-hidden">
+                <h2>
+                    Account Name
+                </h2>
+                <h3>
+                    Very Important Data
+                </h3>
+                <p>Mips</p>
+                <h3>
+                    Second Very Important Data
+                </h3>
+                <p>Mips</p>
+            </div>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js" integrity="sha384-1oM1DKD8kSRaYlZ0W/77KS5wP0kjvz4alkM5lAgnXtt0MZf0YrwkB5U+Q0t+zQ0R" crossorigin="anonymous"></script>
+        <script type="module" src="../scripts/main.js"></script>
+    </body>
+</html>

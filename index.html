@@ -12,8 +12,12 @@
                 Systeme de temperature
             </h1>
 
-            <!-- Système d'onglets accessible avec ARIA -->
-            <div role="tablist" aria-label="Panneaux de température">
+            <div>
+                <div>
+                    <button class="button"><a href="ressources/pages/account.html">Account</a></button>
+                </div>
+                <!-- Système d'onglets accessible avec ARIA -->
+                <div role="tablist" class="manual" aria-label="Panneaux de température">
                 <button role="tab"
                         id="btnTempsReel"
                         class="active"
@@ -27,7 +31,7 @@
                         id="btnHistorique"
                         aria-selected="false"
                         aria-controls="historique"
-                        tabindex="-1">
+                        tabindex="1">
                     Historique
                 </button>
 
@@ -35,25 +39,10 @@
                         id="btnDocumentation"
                         aria-selected="false"
                         aria-controls="documentation"
-                        tabindex="-1">
+                        tabindex="2">
                     Documentation
                 </button>
-
-                <button role="tab"
-                        id="btnProfil"
-                        aria-selected="false"
-                        aria-controls="profil"
-                        tabindex="-1">
-                    Profil
-                </button>
-
-                <button role="tab"
-                        id="btnConnexion"
-                        aria-selected="false"
-                        aria-controls="connexion"
-                        tabindex="-1">
-                    Connexion
-                </button>
+                </div>
             </div>
             <hr>
         </header>
@@ -66,10 +55,21 @@
                 <h2>
                     Temperature:
                 </h2>
-                <p id="temperature" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
-                <div id="avertTemp" role="alert">
-                    <p id="message" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
+                <h3>
+                    extérieur
+                </h3>
+                <p id="case" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
+                <div id="avertTempExt" role="alert">
+                    <p id="funny_sentence" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
                 </div>
+                <h3>
+                    intérieur
+                </h3>
+                <p id="case_int" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
+                <div id="avertTempInt" role="alert">
+                    <p id="funny_sentence_int" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
+                </div>
+
             </div>
 
             <!-- Panneau 2: Historique -->
@@ -77,17 +77,62 @@
                  role="tabpanel"
                  aria-labelledby="btnHistorique"
                  tabindex="0"
-                 class="hidden"
-                 hidden>
+                 class="is-hidden">
                 <h2>
                     Historique des temperatures:
                 </h2>
-                <p id="listeHistorique" aria-live="polite" aria-atomic="true" aria-relevant="all">
+                <h3>
+                    extérieur
+                </h3>
+                <div class="chart-container">
+                    <canvas id="myChart" aria-label="Histogramme des températures extérieures" role="img"></canvas>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                </div>
+                <p id="listeHistoriqueExt" aria-live="polite" aria-atomic="true" aria-relevant="all">
 
                 </p>
+                <h3>
+                    intérieur
+                </h3>
+                <div class="chart-container">
+                    <canvas id="myChart__int" aria-label="Histogramme des températures intérieures" role="img"></canvas>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                </div>
+                <p id="listeHistoriqueInt" aria-live="polite" aria-atomic="true" aria-relevant="all">
+                </p>
             </div>
+
+            <!-- Panneau 3: Documentation -->
+            <div id="documentation"
+                 role="tabpanel"
+                 aria-labelledby="btnDocumentation"
+                 tabindex="0"
+                 class="is-hidden">
+                <h2>
+                    Documentation:
+                </h2>
+                <p>
+                    Ce projet a été réalisé dans le cadre du cours de développement web à l'Université de Montréal. Il vise à créer une interface utilisateur pour un système de surveillance de la température, avec des fonctionnalités d'accessibilité et de visualisation des données.
+                </p>
+            </div>
+            
+            <!-- Panneau 4: Compte -->
+            <div id="compte"
+                 role="tabpanel"
+                 aria-labelledby="btnProfil"
+                 tabindex="0"
+                 class="is-hidden">
+                <h2>
+                    Compte utilisateur:
+                </h2>
+                <p>
+                    Cette section est dédiée à la gestion du compte utilisateur. Vous pouvez y mettre à jour vos informations personnelles, changer votre mot de passe et gérer vos préférences de notification.
+                </p>
+            </div>
+
         </main>
-        <script src="ressources/scripts/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js" integrity="sha384-1oM1DKD8kSRaYlZ0W/77KS5wP0kjvz4alkM5lAgnXtt0MZf0YrwkB5U+Q0t+zQ0R" crossorigin="anonymous"></script>
+        <script type="module" src="ressources/scripts/main.js"></script>
     </body>
 </html>
 
