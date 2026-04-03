@@ -3,14 +3,14 @@
     {
       "type": "Thermique",
       "Nom":  "Interieur",
-      "Valeur": "20",
-      "Timestamp": 1700000000
+      "Valeur":"18.1",
+      "Timestamp": 1774500791
     },
     {
       "type": "Thermique",
       "Nom":  "Exterieur",
-      "Valeur": "15",
-      "Timestamp": 1700000000
+      "Valeur":"5.9",
+      "Timestamp": 1774500791
     }
   ]
 }
