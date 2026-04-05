@@ -10,13 +10,12 @@ window.addEventListener('load', function () {
 });
 
 var temp_hist = new TemperatureHistory('myChart', 50);
-var temp_hist_int = new TemperatureHistory('myChart__int', 50);
+var O_temp_hist_int = new TemperatureHistory('myChart__int', 50);
 
 var temp = new Temperature(
   -10, 40,
-  "case", "funny_sentence", temp_hist,
-  "case_int", "funny_sentence_int", temp_hist_int
+  "case_ext", "funny_sentence", temp_hist,
+  "case_int", "funny_sentence_int", O_temp_hist_int
 );
 
-temp.newRandomArray();
-setInterval(() => temp.change_value(), 20000);
+setInterval(() => temp.get_data(), 100);
