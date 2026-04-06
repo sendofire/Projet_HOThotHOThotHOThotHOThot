@@ -8,7 +8,7 @@ export class Temperature{
   A_value_history = [];
   O_temp_ext;
   I_temp_ext = 0;
-  O_sentence;
+  O_sentence_ext;
   O_hist_temp_ext;
   // variables set for the interior temperature
   A_dummy_data_int = [];
@@ -41,7 +41,7 @@ export class Temperature{
 
     // get the elements for exterior temp from the DOM
     this.O_temp_ext = document.getElementById(temp_box_ext);
-    this.O_sentence = document.getElementById(alert_box);
+    this.O_sentence_ext = document.getElementById(alert_box);
     this.O_hist_temp_ext = history_temp;
     // get the elements for interior temp from the DOM
     this.O_temp_int = document.getElementById(temp_box_int);
@@ -96,6 +96,8 @@ export class Temperature{
 
       // NOTE : see the file "temp.json" for the structure of the data sent by the socket.
 
+      this.check_color();
+
       // if (data.Nom === "interieur") {
       //     // this.A_dummy_data = data.values;
       //     // this.change_value();
@@ -117,46 +119,51 @@ export class Temperature{
   }
 
   /**
-   * Checks the current temperature values in A_dummy_data and A_dummy_data_int
-   * at indices I_temp and I_temp_int, and updates the class of O_temp and O_temp_int,
-   * as well as the text content of O_sentence and O_sentence_int, based on the temperature thresholds.
+   * Check the current temperature values for both interior and exterior sensors
+   * and update the class of the DOM elements and the corresponding sentences
+   * based on the temperature thresholds.
+   * For the exterior temperature:
+   * - If the temperature is below 0, it sets the class to "un" and displays "banquise en vue !".
+   * - If the temperature is above 35, it sets the class to "four" and displays "Hot Hot Hot!".
+   * - Otherwise, it removes any class and clears the sentence.
    */
   check_color(){
-      let I_value_ext = this.O_temp_ext.textContent;
-      let I_value_int = this.O_temp_int.textContent;
+    // get the current temperature values from the DOM elements
+    let I_value_ext = this.O_temp_ext.textContent;
+    let I_value_int = this.O_temp_int.textContent;
 
-      // TODO : make it use case statements
-      if (I_value_ext < 0){
-          this.O_temp_ext.setAttribute("class", "un");
-          this.O_sentence.textContent = "banquise en vue !";
-      }
-      else if (I_value_ext > 35){
-          this.O_temp_ext.setAttribute("class", "four");
-          this.O_sentence.textContent = "Hot Hot Hot!";
-      } else {
-          this.O_temp_ext.removeAttribute("class");
-          this.O_sentence.textContent = "";
-      }
-
-      if (I_value_int < 0){
-          this.O_temp_int.setAttribute("class", "un");
-          this.O_sentence_int.textContent = "canalisations gelées, appelez SOS plombier et mettez un bonnet !";
-      }
-      else if (I_value_int < 12 && I_value_int >= 0){
-          this.O_temp_int.setAttribute("class", "deux");
-          this.O_sentence_int.textContent = "montez le chauffage ou mettez un gros pull !";
-      }
-      else if (I_value_int > 22 && I_value_int <= 50){
-          this.O_temp_int.setAttribute("class", "tres");
-          this.O_sentence_int.textContent = "Baissez le chauffage !";
-      }
-      else if (I_value_int > 50){
-          this.O_temp_int.setAttribute("class", "four");
-          this.O_sentence_int.textContent = "Appelez les pompiers ou arrêtez votre barbecue !";
-      } else {
-          this.O_temp_int.removeAttribute("class");
-          this.O_sentence_int.textContent = "";
-      }
+    // check the exterior temperature and update the class and sentence accordingly.
+    if (I_value_ext < 0){
+      this.O_temp_ext.setAttribute("class", "un");
+      this.O_sentence_ext.textContent = "banquise en vue !";
+    }
+    else if (I_value_ext > 35){
+      this.O_temp_ext.setAttribute("class", "four");
+      this.O_sentence_ext.textContent = "Hot Hot Hot!";
+    } else {
+      this.O_temp_ext.removeAttribute("class");
+      this.O_sentence_ext.textContent = "";
+    }
+    // check the interior temperature and update the class and sentence accordingly.
+    if (I_value_int < 0){
+      this.O_temp_int.setAttribute("class", "un");
+      this.O_sentence_int.textContent = "canalisations gelées, appelez SOS plombier et mettez un bonnet !";
+    }
+    else if (I_value_int < 12 && I_value_int >= 0){
+      this.O_temp_int.setAttribute("class", "deux");
+      this.O_sentence_int.textContent = "montez le chauffage ou mettez un gros pull !";
+    }
+    else if (I_value_int > 22 && I_value_int <= 50){
+      this.O_temp_int.setAttribute("class", "tres");
+      this.O_sentence_int.textContent = "Baissez le chauffage !";
+    }
+    else if (I_value_int > 50){
+      this.O_temp_int.setAttribute("class", "four");
+      this.O_sentence_int.textContent = "Appelez les pompiers ou arrêtez votre barbecue !";
+    } else {
+      this.O_temp_int.removeAttribute("class");
+      this.O_sentence_int.textContent = "";
+    }
   }
 
   change_int_temp_value(int_temp){

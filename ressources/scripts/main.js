@@ -14,8 +14,8 @@ var O_temp_hist_int = new TemperatureHistory('myChart__int', 50);
 
 var temp = new Temperature(
   -10, 40,
-  "case_ext", "funny_sentence", temp_hist,
-  "case_int", "funny_sentence_int", O_temp_hist_int
+  "case_ext", "temp_desc_ext", temp_hist,
+  "case_int", "temp_desc_int", O_temp_hist_int
 );
 
 setInterval(() => temp.get_data(), 100);
