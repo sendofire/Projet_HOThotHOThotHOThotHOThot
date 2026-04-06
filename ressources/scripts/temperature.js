@@ -7,6 +7,7 @@ export class Temperature{
   A_dummy_data = [];
   A_value_history = [];
   O_temp_ext;
+  // TODO : this var may be useless
   I_temp_ext = 0;
   O_sentence_ext;
   O_hist_temp_ext;
@@ -14,6 +15,7 @@ export class Temperature{
   A_dummy_data_int = [];
   A_value_history_int = [];
   O_temp_int;
+  // TODO : this var may be useless
   I_temp_int = 0;
   O_sentence_int;
   O_hist_temp_int;
@@ -29,12 +31,12 @@ export class Temperature{
    * @param max
    * @param temp_box_ext
    * @param alert_box
-   * @param history_temp
+   * @param history_temp_ext
    * @param temp_box_int
    * @param alert_box_int
    * @param history_temp_int
    */
-  constructor(min, max, temp_box_ext,     alert_box,     history_temp,
+  constructor(min, max, temp_box_ext,     alert_box,     history_temp_ext,
           temp_box_int, alert_box_int, history_temp_int){
     this.I_val_min = min;
     this.I_val_max = max;
@@ -42,7 +44,7 @@ export class Temperature{
     // get the elements for exterior temp from the DOM
     this.O_temp_ext = document.getElementById(temp_box_ext);
     this.O_sentence_ext = document.getElementById(alert_box);
-    this.O_hist_temp_ext = history_temp;
+    this.O_hist_temp_ext = history_temp_ext;
     // get the elements for interior temp from the DOM
     this.O_temp_int = document.getElementById(temp_box_int);
     this.O_sentence_int = document.getElementById(alert_box_int);
@@ -78,9 +80,8 @@ export class Temperature{
   /**
   * Define event handlers for message, error, and close events.
   * When the connection is opened, it sends a message to the server.
-  * TODO : update the desc for the message sent by the socket.
-  * When a message is received, it parses the data and logs the temperature values from the interior and
-  * exterior sensors.
+  * When a message is received, it parses the data and updates the interior and
+  * exterior temperature values accordingly.
   * It also handles errors and logs when the connection is closed.
   */
   get_data(){
@@ -168,12 +169,18 @@ export class Temperature{
 
   change_int_temp_value(int_temp){
     this.I_temp_int = int_temp;
-    this.O_temp_int.textContent = this.I_temp_int;
+    this.O_temp_int.textContent = int_temp;
+
+    this.O_hist_temp_int.add_to_history(int_temp);
+    this.O_hist_temp_int.refreshChart();
   }
 
   change_ext_temp_value(ext_temp){
     this.I_temp_ext = ext_temp;
     this.O_temp_ext.textContent = this.I_temp_ext;
+
+    this.O_hist_temp_ext.add_to_history(ext_temp);
+    this.O_hist_temp_ext.refreshChart();
   }
 
 /*  /!**
