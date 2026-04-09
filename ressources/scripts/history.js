@@ -1,5 +1,3 @@
-import {Chart} from "chart.js";
-
 export class TemperatureHistory{
 
     chart;
@@ -27,6 +25,11 @@ export class TemperatureHistory{
     //     this.value_history.push(I_value);
     // }
 
+
+    /**
+     * Add to the history of temperature values and refresh the chart to display the updated data.
+     * @param value The new temperature value to be added to the history.
+     */
     add_to_history(value){
         this.value_history.push(value);
         this.refreshChart();
