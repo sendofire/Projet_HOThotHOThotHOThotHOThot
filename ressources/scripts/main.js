@@ -13,7 +13,6 @@ var O_temp_hist_ext = new TemperatureHistory('myChart', 50);
 var O_temp_hist_int = new TemperatureHistory('myChart__int', 50);
 
 var temp = new Temperature(
-  -10, 40,
   "case_ext", "temp_desc_ext", O_temp_hist_ext,
   "case_int", "temp_desc_int", O_temp_hist_int
 );

@@ -1,49 +1,57 @@
 export class Temperature{
-  // variables set for random temperature value generation
-  I_val_min;
-  I_val_max;
-
   // variables set for the exterior temperature
-  A_dummy_data = [];
-  A_value_history = [];
+  /**
+   * The DOM element where the exterior temperature value will be displayed.
+   */
   O_temp_ext;
-  // TODO : this var may be useless
-  I_temp_ext = 0;
+  /**
+   * The DOM element where the sentence related to the exterior temperature will be displayed.
+   */
   O_sentence_ext;
+  /**
+   * The chart where the history of exterior temperature values will be displayed.
+   */
   O_hist_temp_ext;
   // variables set for the interior temperature
-  A_dummy_data_int = [];
-  A_value_history_int = [];
   O_temp_int;
-  // TODO : this var may be useless
-  I_temp_int = 0;
+  /**
+   * The DOM element where the sentence related to the interior temperature will be displayed.
+   */
   O_sentence_int;
+  /**
+   * The chart where the history of interior temperature values will be displayed.
+   */
   O_hist_temp_int;
 
-  // variable for the websocket connection
+  /**
+   * The WebSocket URL for receiving temperature data from the server.
+   * @type {string}
+   */
   S_websocket = "wss://ws.hothothot.dog:9502";
+  /**
+   * The WebSocket object used to establish a connection with the server and receive temperature data.
+   * @type {WebSocket}
+   */
   O_socket = new WebSocket(this.S_websocket);
 
 
   /**
    * Constructor of the temperature class.
-   * @param min
-   * @param max
-   * @param temp_box_ext
-   * @param alert_box
-   * @param history_temp_ext
-   * @param temp_box_int
-   * @param alert_box_int
-   * @param history_temp_int
+   * The constructor initializes the DOM elements for both interior and exterior temperatures,
+   * sets up the WebSocket connection, and prepares the class to receive and display temperature data.
+   * @param temp_box_ext The ID of the DOM element for displaying the exterior temperature.
+   * @param alert_box_ext The ID of the DOM element for displaying the exterior temperature alert sentence.
+   * @param history_temp_ext The chart where the history of exterior temperature values will be displayed.
+   * @param temp_box_int The ID of the DOM element for displaying the interior temperature.
+   * @param alert_box_int The ID of the DOM element for displaying the interior temperature alert sentence.
+   * @param history_temp_int The chart where the history of interior temperature values will be displayed.
    */
-  constructor(min, max, temp_box_ext,     alert_box,     history_temp_ext,
+  constructor(temp_box_ext,     alert_box_ext,     history_temp_ext,
           temp_box_int, alert_box_int, history_temp_int){
-    this.I_val_min = min;
-    this.I_val_max = max;
 
     // get the elements for exterior temp from the DOM
     this.O_temp_ext = document.getElementById(temp_box_ext);
-    this.O_sentence_ext = document.getElementById(alert_box);
+    this.O_sentence_ext = document.getElementById(alert_box_ext);
     this.O_hist_temp_ext = history_temp_ext;
     // get the elements for interior temp from the DOM
     this.O_temp_int = document.getElementById(temp_box_int);
@@ -66,14 +74,19 @@ export class Temperature{
       // The content of the message is arbitrary.
       this.O_socket.send("FIFTY THOUSAND FISH!!!!!!!!");
       console.log("WebSocket connection established.");
+
+      this.give_server_info("Fetching data from the server...");
     };
 
     this.O_socket.onerror = (error) => {
       console.error("WebSocket error:", error);
+
+      this.give_server_info("Error connecting to the server. Please try again later.");
     };
 
     this.O_socket.onclose = () => {
       console.log("WebSocket connection closed.");
+      this.give_server_info("Connection to the server closed. Please refresh the page to reconnect.");
     };
   }
 
@@ -98,24 +111,16 @@ export class Temperature{
       // NOTE : see the file "temp.json" for the structure of the data sent by the socket.
 
       this.check_color();
-
-      // if (data.Nom === "interieur") {
-      //     // this.A_dummy_data = data.values;
-      //     // this.change_value();
-      //     console.log("ext : " + data)
-      // } else if (data.Nom === "exterieur") {
-      //     // this.A_dummy_data_int = data.values;
-      //     // this.change_value();
-      //     console.log("int : " + data)
-      // }
     };
 
     this.O_socket.onerror = (error) => {
       console.error("WebSocket error:", error);
+      this.give_server_info("Error connecting to the server. Please try again later.");
     };
 
     this.O_socket.onclose = () => {
       console.log("WebSocket connection closed.");
+      this.give_server_info("Connection to the server closed. Please refresh the page to reconnect.");
     };
   }
 
@@ -167,64 +172,37 @@ export class Temperature{
     }
   }
 
-  change_int_temp_value(int_temp){
-    this.I_temp_int = int_temp;
-    this.O_temp_int.textContent = int_temp;
+  /**
+   * Update the interior temperature value in the DOM and add it to the history,
+   * then refresh the chart to display the updated data.
+   * @param I_int_temp The new interior temperature.
+   */
+  change_int_temp_value(I_int_temp){
+    this.O_temp_int.textContent = I_int_temp;
 
-    this.O_hist_temp_int.add_to_history(int_temp);
+    this.O_hist_temp_int.add_to_history(I_int_temp);
     this.O_hist_temp_int.refreshChart();
   }
 
-  change_ext_temp_value(ext_temp){
-    this.I_temp_ext = ext_temp;
-    this.O_temp_ext.textContent = this.I_temp_ext;
+  /**
+   * Update the exterior temperature value in the DOM and add it to the history,
+   * then refresh the chart to display the updated data.
+   * @param I_ext_temp The new exterior temperature.
+   */
+  change_ext_temp_value(I_ext_temp){
+    this.O_temp_ext.textContent = I_ext_temp;
 
-    this.O_hist_temp_ext.add_to_history(ext_temp);
+    this.O_hist_temp_ext.add_to_history(I_ext_temp);
     this.O_hist_temp_ext.refreshChart();
   }
 
-/*  /!**
-   * Returns a random integer between min (inclusive) and max (exclusive).
-   * @param min The minimum value (inclusive).
-   * @param max The maximum value (exclusive).
-   * @returns {number} A random integer between min and max.
-   *!/
-  getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-  }*/
-
-/*  /!**
-   * Generates two new random arrays of 20 integers each, with values between
-   * I_val_min and I_val_max, and assigns them to A_dummy_data and A_dummy_data_int.
-   *!/
-  newRandomArray(){
-    this.A_dummy_data = Array.from({length: 20}, () => this.getRandomInt(this.I_val_min, this.I_val_max));
-    this.A_dummy_data_int = Array.from({length: 20}, () => this.getRandomInt(this.I_val_min, this.I_val_max));
-  } */
-
-  /*
-  change_value(){
-    if (this.O_hist_temp_ext && this.O_temp_hist_int){
-      this.O_hist_temp_ext.add_to_history(this.A_dummy_data, this.I_temp_ext);
-      this.O_hist_temp_ext.refreshChart();
-      this.O_temp_hist_int.add_to_history(this.A_dummy_data_int, this.I_temp_int);
-      this.O_temp_hist_int.refreshChart();
-    }
-
-    this.O_temp_ext.textContent = this.A_dummy_data[this.I_temp_ext];
-    this.O_temp_int.textContent = this.A_dummy_data_int[this.I_temp_int];
-    this.check_color();
-
-    const endReached = this.I_temp_ext >= 19 || this.I_temp_int >= 19;
-
-    this.I_temp_ext = (this.I_temp_ext + 1) % 20;
-    this.I_temp_int = (this.I_temp_int + 1) % 20;
-
-    if (endReached) {
-      this.newRandomArray();
-    }
+  /**
+   * Print the information received from the server in the corresponding DOM
+   * elements for both interior and exterior temperatures.
+   * @param S_info
+   */
+  give_server_info(S_info){
+    this.O_sentence_int.textContent = S_info;
+    this.O_sentence_ext.textContent = S_info;
   }
-  */
 }
