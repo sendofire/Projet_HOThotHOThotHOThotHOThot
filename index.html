@@ -15,6 +15,11 @@
             <div>
                 <div>
                     <button class="button"><a href="ressources/pages/account.html">Account</a></button>
+                    <div id="notifications" role="alert" aria-live="assertive" aria-atomic="true">
+                        <button class="button" id="btnNotifications" type="button">Activer les notifications</button>
+                        <button class="button" id="btnStopNotifications" type="button">Couper notif navigateur</button>
+                        <button class="button" id="btnAlertes" type="button">Historique des alertes</button>
+                    </div>
                 </div>
                 <!-- Système d'onglets accessible avec ARIA -->
                 <div role="tablist" class="manual" aria-label="Panneaux de température">
@@ -132,12 +137,6 @@
                 <p>
                     Cette section est dédiée à la gestion du compte utilisateur. Vous pouvez y mettre à jour vos informations personnelles, changer votre mot de passe et gérer vos préférences de notification.
                 </p>
-            </div>
-
-            <div id="notifications" role="alert" aria-live="assertive" aria-atomic="true">
-                <button class="button" id="btnNotifications" type="button">Activer les notifications</button>
-                <button class="button" id="btnStopNotifications" type="button">Couper notif navigateur</button>
-                <button class="button" id="btnAlertes" type="button">Alertes passées</button>
             </div>
 
         </main>
