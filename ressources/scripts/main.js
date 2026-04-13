@@ -10,8 +10,8 @@ window.addEventListener('load', function () {
   }
 });
 
-var temp_hist = new TemperatureHistory('myChart', 50);
-var temp_hist_int = new TemperatureHistory('myChart__int', 50);
+var O_temp_hist_ext = new TemperatureHistory('myChart', 50);
+var O_temp_hist_int = new TemperatureHistory('myChart__int', 50);
 var notifications = new AlertNotifications({
   historyElement: document.getElementById('alertList'),
   dialogElement: document.getElementById('alertDialog'),
@@ -19,17 +19,11 @@ var notifications = new AlertNotifications({
 });
 
 var temp = new Temperature(
--10, 40,
-"case", "funny_sentence", temp_hist,
-"case_int", "funny_sentence_int", temp_hist_int,
-"minJourExt", "maxJourExt",
-"minJourInt", "maxJourInt",
-notifications
+  "case_ext", "temp_desc_ext", O_temp_hist_ext,
+  "case_int", "temp_desc_int", O_temp_hist_int,"minJourExt", "maxJourExt",
+  "minJourInt", "maxJourInt",
+  notifications
 );
-
-//setInterval(temp.change_value, 200);
-temp.newRandomArray();
-setInterval(() => temp.change_value(), 2000);
 
 notifications.bindDialogControls({
   openButton: document.getElementById('btnAlertes'),
@@ -49,3 +43,6 @@ if (btnStopNotifications) {
     notifications.disableBrowserNotifications();
   });
 }
+
+//setInterval(temp.change_value, 200);
+setInterval(() => temp.get_data(), 1500);
