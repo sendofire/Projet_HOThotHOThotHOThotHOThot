@@ -114,6 +114,8 @@ export class Temperature{
    * open, error, and close events.
    */
   connect_socket(){
+    this.give_server_info("Connecting to the server...");
+
     this.O_socket.onopen = () => {
       // the "send" method is mandatory because the socket will close the
       // connection if it doesn't receive any message from the client within
