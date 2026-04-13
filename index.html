@@ -15,6 +15,11 @@
             <div>
                 <div>
                     <button class="button"><a href="ressources/pages/account.html">Account</a></button>
+                    <div id="notifications" role="alert" aria-live="assertive" aria-atomic="true">
+                        <button class="button" id="btnNotifications" type="button">Activer les notifications</button>
+                        <button class="button" id="btnStopNotifications" type="button">Couper notif navigateur</button>
+                        <button class="button" id="btnAlertes" type="button">Historique des alertes</button>
+                    </div>
                 </div>
                 <!-- Système d'onglets accessible avec ARIA -->
                 <div role="tablist" class="manual" aria-label="Panneaux de température">
@@ -59,6 +64,8 @@
                     extérieur
                 </h3>
                 <p id="case_ext" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
+                <p id="minJourExt"></p>
+                <p id="maxJourExt"></p>
                 <div id="avertTempExt" role="alert">
                     <p id="temp_desc_ext" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
                 </div>
@@ -66,6 +73,8 @@
                     intérieur
                 </h3>
                 <p id="case_int" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
+                <p id="minJourInt"></p>
+                <p id="maxJourInt"></p>
                 <div id="avertTempInt" role="alert">
                     <p id="temp_desc_int" aria-live="polite" aria-atomic="true" aria-relevant="all"></p>
                 </div>
@@ -131,6 +140,13 @@
             </div>
 
         </main>
+        <dialog id="alertDialog" aria-labelledby="alertDialogTitle" aria-hidden="true">
+            <form method="dialog">
+                <h2 id="alertDialogTitle">Alertes passées</h2>
+                <ul id="alertList"></ul>
+                <button id="btnCloseAlertes" class="button" value="close">Fermer</button>
+            </form>
+        </dialog>
         <script src="https://cdn.jsdelivr.net/npm/chart.js" integrity="sha384-1oM1DKD8kSRaYlZ0W/77KS5wP0kjvz4alkM5lAgnXtt0MZf0YrwkB5U+Q0t+zQ0R" crossorigin="anonymous"></script>
         <script type="module" src="ressources/scripts/main.js"></script>
     </body>
