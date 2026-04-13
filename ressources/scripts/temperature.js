@@ -297,4 +297,17 @@ export class Temperature{
     this.O_sentence_int.textContent = S_info;
     this.O_sentence_ext.textContent = S_info;
   }
+
+  /**
+   * Generate data for testing purposes.
+   * @deprecated
+   */
+  get_dummy_data(){
+    // this method is used to generate dummy data for testing purposes.
+    //Math.floor(Math.random() * 60) - 10; // generates a random temperature between -10 and 50
+    this.change_int_temp_value(Math.floor(Math.random() * 60) - 10);
+    this.change_ext_temp_value(Math.floor(Math.random() * 60) - 10);
+
+    this.check_color();
+  }
 }
