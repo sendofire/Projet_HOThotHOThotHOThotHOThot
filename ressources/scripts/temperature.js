@@ -22,16 +22,35 @@ export class Temperature{
    * The chart where the history of interior temperature values will be displayed.
    */
   O_hist_temp_int;
-
+  // variables for the alert message related to the exterior temperature
+  /**
+   * The DOM element where the minimum exterior temperature of the day will be displayed (optional).
+   */
   O_min_temp;
+  /**
+   * The DOM element where the maximum exterior temperature of the day will be displayed (optional).
+   */
   O_max_temp;
-
+  /**
+   * The DOM element where the minimum interior temperature of the day will be displayed (optional).
+   */
   O_min_temp_int;
+  /**
+   * The DOM element where the maximum interior temperature of the day will be displayed (optional).
+   */
   O_max_temp_int;
-
+  /**
+   * An instance of a notification system to emit alerts when certain temperature
+   * thresholds are crossed (optional).
+   */
   notifier;
+  /**
+   * A variable to keep track of the last alert key emitted, used to prevent
+   * emitting duplicate alerts for the same temperature value and label.
+   * @type {null}
+   */
   lastAlertKey = null;
-
+  // variables for the WebSocket connection
   /**
    * The WebSocket URL for receiving temperature data from the server.
    * @type {string}
@@ -54,17 +73,22 @@ export class Temperature{
    * @param temp_box_int The ID of the DOM element for displaying the interior temperature.
    * @param alert_box_int The ID of the DOM element for displaying the interior temperature alert sentence.
    * @param history_temp_int The chart where the history of interior temperature values will be displayed.
+   * @param min_box The ID of the DOM element for displaying the minimum exterior temperature of the day (optional).
+   * @param max_box The ID of the DOM element for displaying the maximum exterior temperature of the day (optional).
+   * @param min_box_int The ID of the DOM element for displaying the minimum interior temperature of the day (optional).
+   * @param max_box_int The ID of the DOM element for displaying the maximum interior temperature of the day (optional).
+   * @param notifier An instance of a notification system to emit alerts when certain temperature thresholds are crossed (optional).
    */
   constructor(temp_box_ext,     alert_box_ext,     history_temp_ext,
           temp_box_int, alert_box_int, history_temp_int, min_box = null, max_box = null,
-              min_box_int = null, max_box_int = null,
-              notifier = null){
+          min_box_int = null, max_box_int = null, notifier = null){
 
     // get the elements for exterior temp from the DOM
     this.O_temp_ext = document.getElementById(temp_box_ext);
     this.O_sentence_ext = document.getElementById(alert_box_ext);
     this.O_hist_temp_ext = history_temp_ext;
 
+    // Setup for the alert message for the exterior temperature
     this.O_min_temp = min_box ? document.getElementById(min_box) : null;
     this.O_max_temp = max_box ? document.getElementById(max_box) : null;
 
@@ -73,8 +97,11 @@ export class Temperature{
     this.O_sentence_int = document.getElementById(alert_box_int);
     this.O_hist_temp_int = history_temp_int;
 
+    // Setup for the aler message for the interior temperature
     this.O_min_temp_int = min_box_int ? document.getElementById(min_box_int) : null;
     this.O_max_temp_int = max_box_int ? document.getElementById(max_box_int) : null;
+
+    // set the notifier for emitting alerts when certain temperature thresholds are crossed
     this.notifier = notifier;
 
     // call the method to connect to the websocket and set up event handlers
@@ -192,11 +219,14 @@ export class Temperature{
     }
 
     this.updateDailyBounds();
-    this.emitAlertIfNeeded(I_value, "exterieur", "funny_sentence");
-    this.emitAlertIfNeeded(I_value_int, "interieur", "funny_sentence_int");
+    // look if it is possible to use the objects O_sentence_ext and O_sentence_int as source value.
+    this.emitAlertIfNeeded(I_value_ext, "exterieur", "temp_desc_ext");
+    this.emitAlertIfNeeded(I_value_int, "interieur", "temp_desc_int");
   }
 
+
   updateDailyBounds(){
+    // TODO : it use the now deleted A_dummy_data and A_dummy_data_int, we should replace it with the history of temperature values from the charts.
     if (this.O_min_temp) {
       this.O_min_temp.textContent = `Min du jour: ${Math.min(...this.A_dummy_data)}°C`;
     }
@@ -223,9 +253,7 @@ export class Temperature{
 
         if (this.notifier) {
           this.notifier.addAlert({
-            value,
-            label,
-            source,
+            value, label, source,
           });
         }
       }

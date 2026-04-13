@@ -10,8 +10,8 @@ window.addEventListener('load', function () {
   }
 });
 
-var temp_hist = new TemperatureHistory('myChart', 50);
-var temp_hist_int = new TemperatureHistory('myChart__int', 50);
+var O_temp_hist_ext = new TemperatureHistory('myChart', 50);
+var O_temp_hist_int = new TemperatureHistory('myChart__int', 50);
 var notifications = new AlertNotifications({
   historyElement: document.getElementById('alertList'),
   dialogElement: document.getElementById('alertDialog'),
@@ -24,9 +24,6 @@ var temp = new Temperature(
   "minJourInt", "maxJourInt",
   notifications
 );
-
-//setInterval(temp.change_value, 200);
-setInterval(() => temp.get_data(), 100);
 
 notifications.bindDialogControls({
   openButton: document.getElementById('btnAlertes'),
@@ -46,3 +43,6 @@ if (btnStopNotifications) {
     notifications.disableBrowserNotifications();
   });
 }
+
+//setInterval(temp.change_value, 200);
+setInterval(() => temp.get_data(), 100);
