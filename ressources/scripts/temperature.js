@@ -239,12 +239,12 @@ export class Temperature{
 
     if (this.O_min_temp_int) {
       // this.O_min_temp_int.textContent = `Min du jour: ${Math.min(...this.A_dummy_data_int)}°C`;
-      this.O_max_temp.textContent = `Max du jour: ${Math.max(...this.O_hist_temp_int.get_history())}°C`;
+      this.O_min_temp_int.textContent = `Min du jour: ${Math.min(...this.O_hist_temp_int.get_history())}°C`;
     }
 
     if (this.O_max_temp_int) {
       // this.O_max_temp_int.textContent = `Max du jour: ${Math.max(...this.A_dummy_data_int)}°C`;
-      this.O_max_temp.textContent = `Max du jour: ${Math.max(...this.O_hist_temp_int.get_history())}°C`;
+      this.O_max_temp_int.textContent = `Max du jour: ${Math.max(...this.O_hist_temp_int.get_history())}°C`;
     }
   }
 

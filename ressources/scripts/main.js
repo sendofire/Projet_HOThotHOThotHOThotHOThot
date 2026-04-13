@@ -45,4 +45,4 @@ if (btnStopNotifications) {
 }
 
 //setInterval(temp.change_value, 200);
-setInterval(() => temp.get_data(), 100);
+setInterval(() => temp.get_data(), 1500);
