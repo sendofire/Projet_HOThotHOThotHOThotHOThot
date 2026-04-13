@@ -228,19 +228,23 @@ export class Temperature{
   updateDailyBounds(){
     // TODO : it use the now deleted A_dummy_data and A_dummy_data_int, we should replace it with the history of temperature values from the charts.
     if (this.O_min_temp) {
-      this.O_min_temp.textContent = `Min du jour: ${Math.min(...this.A_dummy_data)}°C`;
+      //this.O_min_temp.textContent = `Min du jour: ${Math.min(...this.A_dummy_data)}°C`;
+      this.O_min_temp.textContent = `Min du jour: ${Math.min(...this.O_hist_temp_ext.get_history())}°C`;
     }
 
     if (this.O_max_temp) {
-      this.O_max_temp.textContent = `Max du jour: ${Math.max(...this.A_dummy_data)}°C`;
+      // this.O_max_temp.textContent = `Max du jour: ${Math.max(...this.A_dummy_data)}°C`;
+      this.O_max_temp.textContent = `Max du jour: ${Math.max(...this.O_hist_temp_ext.get_history())}°C`;
     }
 
     if (this.O_min_temp_int) {
-      this.O_min_temp_int.textContent = `Min du jour: ${Math.min(...this.A_dummy_data_int)}°C`;
+      // this.O_min_temp_int.textContent = `Min du jour: ${Math.min(...this.A_dummy_data_int)}°C`;
+      this.O_max_temp.textContent = `Max du jour: ${Math.max(...this.O_hist_temp_int.get_history())}°C`;
     }
 
     if (this.O_max_temp_int) {
-      this.O_max_temp_int.textContent = `Max du jour: ${Math.max(...this.A_dummy_data_int)}°C`;
+      // this.O_max_temp_int.textContent = `Max du jour: ${Math.max(...this.A_dummy_data_int)}°C`;
+      this.O_max_temp.textContent = `Max du jour: ${Math.max(...this.O_hist_temp_int.get_history())}°C`;
     }
   }
 

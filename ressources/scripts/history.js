@@ -50,4 +50,8 @@ export class TemperatureHistory{
       if (value <= 30) return '#FFB74D';
       return '#E57373';
     }
+
+    get_history(){
+        return this.value_history;
+    }
 }
