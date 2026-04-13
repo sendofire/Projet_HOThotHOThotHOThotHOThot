@@ -5,6 +5,7 @@ const TEMP_DATA_URL  = '/ressources/data/latest-temps.json';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
+  '/ressources/pages/offline.html',
   '/ressources/pages/account.html',
   '/ressources/styles/style.css',
   '/ressources/scripts/main.js',
@@ -104,7 +105,7 @@ async function networkFirstStrategy(request, cacheName) {
 
 function offlineFallback(request) {
   if (request.destination === 'document') {
-    return caches.match('/index.html');
+    return caches.match('/offline.html') || caches.match('/index.html');
   }
   if (request.destination === 'image') {
     return new Response('', { status: 200 });

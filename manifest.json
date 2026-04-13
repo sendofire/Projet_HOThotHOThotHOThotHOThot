@@ -2,6 +2,7 @@
   "name": "Système de Température",
   "short_name": "TempSys",
   "description": "Surveillance de température intérieure et extérieure",
+  "id": "/index.html",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#f5f7fa",

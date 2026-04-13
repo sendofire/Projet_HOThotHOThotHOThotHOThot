@@ -12,7 +12,7 @@ window.addEventListener('load', function () {
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
-      .register('./service_worker.js')
+      .register('/service_worker.js')
       .then(reg => {
         console.log('[PWA] Service Worker enregistré :', reg.scope);
 
